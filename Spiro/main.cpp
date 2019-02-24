@@ -9,6 +9,8 @@ int main()
 	RenderWindow window(VideoMode(800, 600), "SFML", 7U, setting);
 
 	CircleShape circle(30);
+	RectangleShape square(Vector2f(60, 60));
+	square.setPosition(400, 400);
 
 	while (window.isOpen())
 	{
@@ -24,6 +26,7 @@ int main()
 
 		window.clear(Color::Black);
 		window.draw(circle);
+		window.draw(square);
 		window.display();
 	}
 
