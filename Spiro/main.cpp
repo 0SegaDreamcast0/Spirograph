@@ -22,7 +22,7 @@ public:
 	{
 		alpha += 0.01;
 		alpha0 += 0.0004;
-		r = 100 * cos(4 * alpha + alpha0);
+		r = 10 * (2 + 3 * cos(alpha));
 		Vector2f tran;
 		tran.x = r * cos(alpha);
 		tran.y = r * sin(alpha);
