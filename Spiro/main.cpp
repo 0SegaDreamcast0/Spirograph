@@ -60,7 +60,7 @@ int main()
 	{
 		spiro.update();
 		
-
+		
 		Event event;
 		while (window.pollEvent(event))
 		{
