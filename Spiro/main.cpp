@@ -3,28 +3,63 @@
 
 using namespace sf;
 
+class Spirograph
+{
+public:
+	Spirograph(const Vector2f& position) : 
+		position(position), 
+		circle(3),
+		line(LinesStrip),
+		r(0),
+		alpha(0),
+		alpha0(0)
+	{
+		circle.setOrigin(3, 3);
+
+	}
+
+	void update()
+	{
+		alpha += 0.01;
+		alpha0 += 0.0004;
+		r = 100 * cos(4 * alpha + alpha0);
+		Vector2f tran;
+		tran.x = r * cos(alpha);
+		tran.y = r * sin(alpha);
+		line.append(Vertex(position + tran));
+		circle.setPosition(position + tran);
+	}
+
+	CircleShape circle;
+	VertexArray line;
+
+	
+
+private:
+	Vector2f position;
+	float r;
+	float alpha;
+	float alpha0;
+	
+};
+
+
+
 int main()
 {
+
 	ContextSettings setting;
 	setting.antialiasingLevel = 8;
 	RenderWindow window(VideoMode(800, 600), "SFML", 7U, setting);
 
-	Vector2f position(400, 300);
-	CircleShape circle(3);
-	circle.setOrigin(3, 3);
-
-	VertexArray line(LinesStrip);
-
-	float r(0);
-	float alpha(0);
-	float alpha0(50);
+	Spirograph spiro(Vector2f(400, 300));
 
 	std::cout << "asd";
 
 	while (window.isOpen())
 	{
-		alpha += 0.01;
-		alpha0 += 0.0004;
+		spiro.update();
+		
 
 		Event event;
 		while (window.pollEvent(event))
@@ -36,16 +71,11 @@ int main()
 			}
 		}
 
-		r = 100 * cos(4 * alpha + alpha0);
-
-		position.x = 400 + r * cos(alpha);
-		position.y = 300 + r * sin(alpha);
-		line.append(Vertex(position));
-		circle.setPosition(position);
+		
 
 		window.clear(Color::Black);
-		window.draw(circle);
-		window.draw(line);
+		window.draw(spiro.line);
+		window.draw(spiro.circle);
 		window.display();
 	}
 
