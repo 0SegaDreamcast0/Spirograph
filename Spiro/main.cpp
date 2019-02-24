@@ -1,4 +1,5 @@
 #include "SFML/Graphics.hpp"
+#include <iostream>
 
 using namespace sf;
 
@@ -11,6 +12,8 @@ int main()
 	CircleShape circle(30);
 	RectangleShape square(Vector2f(60, 60));
 	square.setPosition(400, 400);
+
+	std::cout << "asd";
 
 	while (window.isOpen())
 	{
